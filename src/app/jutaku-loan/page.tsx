@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ToolSeoContent, { getSeoTool } from "../ToolSeoContent";
 import JutakuLoanCalculator from "./Calculator";
 
 export const metadata: Metadata = {
@@ -14,5 +15,6 @@ export const metadata: Metadata = {
 };
 
 export default function JutakuLoanPage() {
-  return <JutakuLoanCalculator />;
+  const tool = getSeoTool("jutaku-loan");
+  return <><JutakuLoanCalculator />{tool && <ToolSeoContent tool={tool} />}</>;
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SimpleToolCalculator from "../SimpleToolCalculator";
+import ToolSeoContent from "../ToolSeoContent";
 import { getTool, tools } from "../tool-data";
 
 type PageProps = {
@@ -44,6 +45,10 @@ export default async function ToolPage({ params }: PageProps) {
     notFound();
   }
 
-  return <SimpleToolCalculator tool={tool} />;
+  return (
+    <>
+      <SimpleToolCalculator tool={tool} />
+      <ToolSeoContent tool={tool} />
+    </>
+  );
 }
-

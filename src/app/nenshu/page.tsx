@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ToolSeoContent, { getSeoTool } from "../ToolSeoContent";
 import NenshuCalculator from "./Calculator";
 
 export const metadata: Metadata = {
@@ -14,5 +15,6 @@ export const metadata: Metadata = {
 };
 
 export default function NenshuPage() {
-  return <NenshuCalculator />;
+  const tool = getSeoTool("nenshu");
+  return <><NenshuCalculator />{tool && <ToolSeoContent tool={tool} />}</>;
 }

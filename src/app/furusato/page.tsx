@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ToolSeoContent, { getSeoTool } from "../ToolSeoContent";
 import FurusatoCalculator from "./Calculator";
 
 export const metadata: Metadata = {
@@ -14,5 +15,6 @@ export const metadata: Metadata = {
 };
 
 export default function FurusatoPage() {
-  return <FurusatoCalculator />;
+  const tool = getSeoTool("furusato");
+  return <><FurusatoCalculator />{tool && <ToolSeoContent tool={tool} />}</>;
 }

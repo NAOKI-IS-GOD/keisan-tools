@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ToolSeoContent, { getSeoTool } from "../ToolSeoContent";
 import DenkiCalculator from "./Calculator";
 
 export const metadata: Metadata = {
@@ -14,5 +15,6 @@ export const metadata: Metadata = {
 };
 
 export default function DenkiPage() {
-  return <DenkiCalculator />;
+  const tool = getSeoTool("denki");
+  return <><DenkiCalculator />{tool && <ToolSeoContent tool={tool} />}</>;
 }
