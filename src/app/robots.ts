@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "./site";
 
+export const dynamic = "force-static";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
@@ -10,4 +12,3 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: `${siteUrl}/sitemap.xml`,
   };
 }
-
