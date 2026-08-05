@@ -1,4 +1,12 @@
-name: Deploy Next.js site to Pages
+name: Retire GitHub Pages mirror
+
+# このサイトの公開先は Vercel (https://keisan-tools-alpha.vercel.app) に一本化した。
+# GitHub Pages には以前、同じ内容のミラーが公開されており、検索エンジンから見ると
+# 重複コンテンツになっていた。ここではサイト本体をビルドせず、
+# 「全ページ noindex + 本サイトへの案内」だけを公開してミラーを無効化する。
+#
+# リポジトリの Settings > Pages で Source を None にすれば、この
+# ワークフローごと削除できる。
 
 on:
   push:
@@ -18,28 +26,43 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
+      - name: Build tombstone site
+        run: |
+          mkdir -p site
+          cat > site/robots.txt <<'EOF'
+          User-agent: *
+          Disallow: /
+          EOF
+          cat > site/index.html <<'EOF'
+          <!doctype html>
+          <html lang="ja">
+            <head>
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <meta name="robots" content="noindex, nofollow" />
+              <link rel="canonical" href="https://keisan-tools-alpha.vercel.app/" />
+              <meta http-equiv="refresh" content="0; url=https://keisan-tools-alpha.vercel.app/" />
+              <title>ソク計算は移転しました</title>
+            </head>
+            <body style="font-family: system-ui, sans-serif; max-width: 34em; margin: 12vh auto; padding: 0 1.2em; line-height: 1.9; color: #172033">
+              <h1 style="font-size: 1.4em">ソク計算は移転しました</h1>
+              <p>
+                このページの内容は
+                <a href="https://keisan-tools-alpha.vercel.app/">keisan-tools-alpha.vercel.app</a>
+                へ移動しました。自動で移動しない場合は上のリンクをクリックしてください。
+              </p>
+            </body>
+          </html>
+          EOF
+          cp site/index.html site/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ./site
 
   deploy:
     environment:
