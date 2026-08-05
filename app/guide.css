@@ -1,0 +1,14 @@
+.guide{max-width:760px;margin:8px auto 0;padding-bottom:8px}
+.guide section{border-top:1px solid var(--line);margin-top:34px;padding-top:30px}
+.guide section:first-child{border-top:0;margin-top:14px;padding-top:0}
+.guide h2{font-size:23px;letter-spacing:-.02em;margin:0 0 16px}
+.guide h3{font-size:17px;margin:28px 0 12px}
+.guide p{color:#41506a;line-height:1.95;margin:0 0 14px;font-size:16px}
+.guide ol,.guide ul{margin:0;padding-left:1.35em}
+.guide li{color:#41506a;line-height:1.85;margin-bottom:10px}
+.guide ol li::marker{font-weight:800;color:var(--blue)}
+.faq{margin:0}
+.faq-item{border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:12px;background:var(--pale)}
+.faq dt{font-weight:800;line-height:1.7;margin-bottom:9px}
+.faq dd{margin:0;color:#41506a;line-height:1.9;font-size:15px}
+@media(max-width:640px){.guide h2{font-size:20px}.guide p,.guide li{font-size:15px}}

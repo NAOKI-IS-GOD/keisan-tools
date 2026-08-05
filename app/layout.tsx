@@ -1,3 +1,3 @@
-import type {Metadata} from 'next';import './globals.css';import './strategy.css';
+import type {Metadata} from 'next';import './globals.css';import './strategy.css';import './guide.css';
 export const metadata:Metadata={metadataBase:new URL('https://keisan-tools-alpha.vercel.app'),title:{default:'ソク計算 — 無料計算ツール48種類',template:'%s | ソク計算'},description:'手取り・税金・ローン・暮らし・健康に役立つ無料計算ツール48種類。',robots:{index:true,follow:true}};
 export default function Layout({children}:{children:React.ReactNode}){return <html lang="ja"><body><header><div className="wrap"><a className="logo" href="/">ソク計算</a><nav><a href="/#money">お金</a><a href="/#work">仕事</a><a href="/#life">暮らし</a><a href="/#health">健康</a></nav></div></header>{children}<footer><div className="wrap">計算結果は概算です。契約・申告・診断の最終判断には公的機関や専門家の最新情報をご確認ください。<br/>© 2026 ソク計算</div></footer></body></html>}
