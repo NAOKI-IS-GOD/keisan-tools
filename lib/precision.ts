@@ -3,11 +3,11 @@ import {bonusNet,furusatoLimit,netAnnual,requiredGross,retirementNet} from './ta
 // クライアント側のみで使う高精度計算レジストリ。
 // tools.ts には fn の名前だけを持たせる（サーバー→クライアントは関数を渡せないため）。
 export const PRECISE:Record<string,(v:Record<string,number>)=>number>={
-  'nenshu':v=>netAnnual(v.income*10000)/10000,
+  'nenshu':v=>netAnnual(v.income*10000,v.age)/10000,
   'furusato':v=>Math.floor(furusatoLimit(v.income*10000)/100)*100,
-  'bonus':v=>bonusNet(v.amount*10000)/10000,
+  'bonus':v=>bonusNet(v.amount*10000,v.age)/10000,
   'taishokukin':v=>retirementNet(v.amount*10000,v.years)/10000,
-  'takehome-reverse':v=>requiredGross(v.want*10000)/10000,
+  'takehome-reverse':v=>requiredGross(v.want*10000,v.age)/10000,
   'unemployment':v=>{
     const dayWage=v.salary*10000/30;
     const rate=v.age>=45&&v.age<60?50:60;

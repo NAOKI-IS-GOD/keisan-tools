@@ -4,7 +4,7 @@ import { tools } from '@/lib/tools';
 const BASE = 'https://keisan-tools-alpha.vercel.app';
 
 /** 全ツールの解説本文を書き上げた日。本文を実際に書き換えたときだけ更新する。 */
-const CONTENT_UPDATED = new Date('2026-10-18T00:00:00Z');
+const CONTENT_UPDATED = new Date('2026-10-19T00:00:00Z');
 
 /**
  * そのツールページの「最終更新日」を返す。

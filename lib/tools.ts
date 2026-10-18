@@ -2,7 +2,7 @@ export type Field={key:string;label:string;unit:string;default:number;min?:numbe
 export type Tool={slug:string;name:string;icon:string;category:'money'|'work'|'life'|'health';description:string;fields:Field[];formula:string;resultLabel:string;resultUnit:string;note?:string;fn?:string};
 const f=(key:string,label:string,unit:string,d:number,step=1):Field=>({key,label,unit,default:d,min:0,step});
 export const tools:Tool[]=[
-['nenshu','年収手取り計算機','💰','money','額面年収から社会保険料・所得税・住民税を区分計算で引き、手取りを出す。',[f('income','年収','万円',500)],'income*0.78','年間手取り','万円',undefined,'nenshu'],
+['nenshu','年収手取り計算機','💰','money','額面年収から社会保険料・所得税・住民税を区分計算で引き、手取りを出す。',[f('income','年収','万円',500),f('age','年齢','歳',40)],'income*0.78','年間手取り','万円',undefined,'nenshu'],
 ['furusato','ふるさと納税上限','🎁','money','年収から自己負担2,000円となる寄付上限を住民税所得割・所得税率から逆算。',[f('income','年収','万円',500)],'income*10000*0.02','寄付上限の目安','円',undefined,'furusato'],
 ['shohizei','消費税計算機','🧾','money','税抜価格から税込価格を計算。',[f('price','税抜価格','円',1000),f('rate','税率','%',10)],'price*(1+rate/100)','税込価格','円'],
 ['tsumitate','積立投資シミュレーター','📈','money','毎月積立した場合の将来資産を複利計算。',[f('monthly','毎月の積立額','円',30000),f('rate','年利','%',5,.1),f('years','期間','年',20)],'rate===0?monthly*12*years:monthly*((Math.pow(1+rate/1200,years*12)-1)/(rate/1200))','将来資産','円'],
@@ -25,7 +25,7 @@ export const tools:Tool[]=[
 ['risoku','単利計算機','🏦','money','元金・金利・期間から利息を計算。',[f('principal','元金','万円',100),f('rate','年利','%',2,.1),f('years','期間','年',5)],'principal*10000*rate/100*years','利息','円'],
 ['zeinuki','税抜き価格計算','🛒','money','税込価格から税抜き価格を逆算。',[f('price','税込価格','円',1100),f('rate','税率','%',10)],'price/(1+rate/100)','税抜き価格','円'],
 ['moji','文字数・原稿用紙計算','✍️','work','文字数を400字詰め原稿用紙の枚数に換算。',[f('chars','文字数','文字',2000)],'chars/400','原稿用紙','枚'],
-['bonus','ボーナス手取り計算機','🎉','work','賞与の社会保険料と源泉徴収税額を差し引いた手取りを計算。',[f('amount','ボーナス額面','万円',50)],'amount*0.8','ボーナス手取り','万円',undefined,'bonus'],
+['bonus','ボーナス手取り計算機','🎉','work','賞与の社会保険料と源泉徴収税額を差し引いた手取りを計算。',[f('amount','ボーナス額面','万円',50),f('age','年齢','歳',40)],'amount*0.8','ボーナス手取り','万円',undefined,'bonus'],
 ['fuyo','扶養内収入計算機','👪','work','時給と勤務条件から年間収入を計算。',[f('wage','時給','円',1200),f('hours','週の勤務時間','時間',18),f('weeks','年間勤務週','週',50)],'wage*hours*weeks','年間収入','円'],
 ['income-wall','年収の壁まで計算','🧱','work','現在の収入から指定した年収基準までの残額。',[f('income','現在の年収','万円',100),f('wall','基準額','万円',130)],'Math.max(0,(wall-income)*10000)','基準まで残り','円'],
 ['freelance','個人事業主手取り計算','🧑‍💻','work','売上から経費・税金等を引いた手取り概算。',[f('sales','年間売上','万円',600),f('expenses','年間経費','万円',120),f('rate','税・保険率','%',25)],'(sales-expenses)*(1-rate/100)','年間手取り','万円'],
@@ -48,7 +48,7 @@ export const tools:Tool[]=[
 ['paid-leave','有給休暇の価値','🏖️','work','日給と有給日数から有給休暇の金額価値を計算。',[f('daily','1日分の賃金','円',12000),f('days','有給日数','日',10)],'daily*days','有給の金額価値','円'],
 ['tabako','タバコ代概算','🚬','health','喫煙量からタバコの年間支出を概算。',[f('sticks','1日の冊数','本',20),f('price','1箱の値段','円',500),f('per','1箱の本数','本',20)],'per?sticks*price*(365/per):0','年間のタバコ代','円'],
 ['walk-calorie','歩数から消費カロリー','🚶','health','歩数と体重から1日の消費カロリーを概算。',[f('steps','1日の歩数','歩',8000,100),f('weight','体重','kg',65,.5)],'weight*(steps*0.7/1000)*1.05','消費カロリー','kcal'],
-['takehome-reverse','必要額面年収逆算','🎯','money','希望の手取りから、税・社会保険料を含む実質計算で必要な額面年収を逆算。',[f('want','希望の手取り','万円/年',400)],'want/(1-0.22)','必要な額面年収','万円',undefined,'takehome-reverse'],
+['takehome-reverse','必要額面年収逆算','🎯','money','希望の手取りから、税・社会保険料を含む実質計算で必要な額面年収を逆算。',[f('want','希望の手取り','万円/年',400),f('age','年齢','歳',40)],'want/(1-0.22)','必要な額面年収','万円',undefined,'takehome-reverse'],
 ['fire','FIRE必要資産概算','🔥','money','年間生活費と取崩率から経済的自立に必要な資産額を概算。',[f('annual','年間生活費','万円',300),f('rate','取崩率','%',4,.1)],'rate>0?annual*100/rate:0','必要な資産額','万円'],
 ['revolving','リボ払い利息概算','💳','money','残高・年率・返済期間からリボ払いで発生する利息を概算。',[f('balance','利用残高','万円',50),f('rate','実質年率','%',15,.1),f('months','返済期間','ヶ月',36)],'balance*10000*((rate/1200)*Math.pow(1+rate/1200,months)/(Math.pow(1+rate/1200,months)-1)*months-1)','予想支払利息','円'],
 ['kakei','家計バランス50/30/20','🍱','life','手取り月収から50/30/20ルールの固定費上限を計算。',[f('income','手取り月収','万円',25,.1)],'income*0.5','固定費の目安上限','万円'],

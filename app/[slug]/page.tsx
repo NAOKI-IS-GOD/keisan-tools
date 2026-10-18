@@ -49,7 +49,7 @@ export default async function ToolPage({ params }: PageProps) {
   const guide = guides[t.slug];
   const related = tools.filter((x) => x.category === t.category && x.slug !== t.slug).slice(0, 3);
 
-  const schema = [
+  const schema: Array<Record<string, unknown>> = [
     {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
@@ -75,6 +75,18 @@ export default async function ToolPage({ params }: PageProps) {
       ],
     },
   ];
+
+  if (guide?.faq?.length) {
+    schema.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: guide.faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    });
+  }
 
   return (
     <main>
