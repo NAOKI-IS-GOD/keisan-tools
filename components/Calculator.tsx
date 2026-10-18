@@ -1,6 +1,7 @@
 'use client';
 import {useEffect,useMemo,useState} from 'react';
 import type {Tool} from '@/lib/tools';
+import {PRECISE} from '@/lib/precision';
 import {FAV_EVENT,FAV_KEY} from '@/components/Favorites';
 
 const readFavs=():string[]=>{
@@ -20,11 +21,15 @@ export default function Calculator({tool}:{tool:Tool}){
 
   const result=useMemo(()=>{
     try{
+      if(tool.fn&&PRECISE[tool.fn]){
+        const n=Number(PRECISE[tool.fn](values));
+        return Number.isFinite(n)?n:0;
+      }
       const fn=new Function(...Object.keys(values),`return ${tool.formula}`);
       const n=Number(fn(...Object.values(values)));
       return Number.isFinite(n)?n:0;
     }catch{return 0}
-  },[values,tool.formula]);
+  },[values,tool.formula,tool.fn]);
 
   const shown=Math.abs(result)>=100?Math.round(result).toLocaleString('ja-JP'):Math.round(result*100)/100;
   /** 円系の単位なら万円相当も併記して桁感をつかみやすくする */
