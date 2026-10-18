@@ -49,6 +49,12 @@ export const tools:Tool[]=[
 ['commute-wage','通勤込み実質時給','🚃','work','通勤時間を労働時間に含めた実質時給。',[f('salary','月の手取り','万円',25),f('work','月の労働時間','時間',160),f('commute','月の通勤時間','時間',40)],'work+commute?salary*10000/(work+commute):0','実質時給','円'],
 ['work-hours','勤務時間計算機','🕘','work','出退勤時刻と休憩から実働時間を計算。',[f('start','出勤時刻','時',9,.25),f('end','退勤時刻','時',18,.25),f('break','休憩','時間',1,.25)],'Math.max(0,end-start-break)','実働時間','時間'],
 ['paid-leave','有給休暇の価値','🏖️','work','日給と有給日数から有給休暇の金額価値を計算。',[f('daily','1日分の賃金','円',12000),f('days','有給日数','日',10)],'daily*days','有給の金額価値','円'],
-['salary-convert','日給・月給換算','🔄','work','日給と勤務日数から月給を計算。',[f('daily','日給','円',12000),f('days','月の勤務日数','日',20)],'daily*days','月給','円']
+['salary-convert','日給・月給換算','🔄','work','日給と勤務日数から月給を計算。',[f('daily','日給','円',12000),f('days','月の勤務日数','日',20)],'daily*days','月給','円'],
+['takehome-reverse','必要額面年収逆算','🎯','money','希望の手取りから必要な額面年収を逆算。',[f('want','希望の手取り','万円/年',400),f('rate','控除率（税・社保）','%',22,.5)],'want/(1-rate/100)','必要な額面年収','万円'],
+['fire','FIRE必要資産概算','🔥','money','年間生活費と取崩率から経済的自立に必要な資産額を概算。',[f('annual','年間生活費','万円',300),f('rate','取崩率','%',4,.1)],'rate>0?annual*100/rate:0','必要な資産額','万円'],
+['revolving','リボ払い利息概算','💳','money','残高・年率・返済期間からリボ払いで発生する利息を概算。',[f('balance','利用残高','万円',50),f('rate','実質年率','%',15,.1),f('months','返済期間','ヶ月',36)],'balance*10000*((rate/1200)*Math.pow(1+rate/1200,months)/(Math.pow(1+rate/1200,months)-1)*months-1)','予想支払利息','円'],
+['kakei','家計バランス50/30/20','🍱','life','手取り月収から50/30/20ルールの固定費上限を計算。',[f('income','手取り月収','万円',25,.1)],'income*0.5','固定費の目安上限','万円'],
+['ideal-weight','適正体重計算','🧍','health','BMI22から適正体重を計算。',[f('height','身長','cm',170,.5)],'Math.pow(height/100,2)*22','適正体重','kg'],
+['price-change','値上がり率計算','📈','life','もとの価格と現在の価格から値上がり率を計算。',[f('before','もとの価格','円',1000),f('after','現在の価格','円',1100)],'before?(after-before)/before*100:0','値上がり率','%']
 ].map(x=>({slug:x[0],name:x[1],icon:x[2],category:x[3],description:x[4],fields:x[5],formula:x[6],resultLabel:x[7],resultUnit:x[8],note:x[9]} as Tool));
 export const categories={work:'給与・転職・副業',money:'税金・ローン・資産',life:'住まい・生活費',health:'健康・その他'} as const;
