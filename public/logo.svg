@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288 64" role="img" aria-label="ソク計算">
+  <defs>
+    <linearGradient id="mk" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+  </defs>
+  <!-- マーク: 電卓と矢印の融合 -->
+  <g>
+    <rect x="4" y="8" width="48" height="48" rx="13" fill="url(#mk)"/>
+    <!-- 電卓の画面 -->
+    <rect x="13" y="15" width="30" height="12" rx="3.5" fill="#ffffff" opacity="0.92"/>
+    <!-- 電卓のキー -->
+    <rect x="13" y="31" width="8" height="17" rx="2.5" fill="#ffffff" opacity="0.92"/>
+    <rect x="24" y="31" width="8" height="17" rx="2.5" fill="#ffffff" opacity="0.55"/>
+    <rect x="35" y="31" width="8" height="7" rx="2.5" fill="#ffffff" opacity="0.55"/>
+    <rect x="35" y="41" width="8" height="7" rx="2.5" fill="#ffffff" opacity="0.55"/>
+  </g>
+  <!-- ワードマーク -->
+  <text x="64" y="46" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="34" font-weight="900" letter-spacing="-1" fill="#172033">ソク計算</text>
+  <text x="213" y="46" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="12" font-weight="700" letter-spacing="2" fill="#2563eb">TOOLS</text>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      text:first-of-type { fill: #e5ecf8; }
+    }
+  </style>
+</svg>
